@@ -132,12 +132,12 @@ public class FilterActivity extends AppCompatActivity {
 
     public void startTakePicIntent(View view) {
         Intent intent = new Intent(FilterActivity.this, TakePicActivity.class);
-        startActivityForResult(intent, 1);
+        startActivityForResult(intent, 0);
     }
 
     public void startGalleryIntent(View view) {
         Intent intent = new Intent(FilterActivity.this, GalleryActivity.class);
-        startActivityForResult(intent, 1);
+        startActivityForResult(intent, 0);
     }
 
     public void startFirstIntent(View view) {

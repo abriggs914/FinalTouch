@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/darkBackground"
+    tools:context=".LibraryActivity"
+    tools:layout_editor_absoluteY="81dp">
+
+    <ImageButton
+        android:id="@+id/back_to_main_menu_button_fromlibrary"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="26dp"
+        android:layout_marginLeft="26dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="26dp"
+        android:layout_marginRight="26dp"
+        android:onClick="startFirstIntent"
+        android:src="@drawable/arrow_back_black_24dp"
+        app:layout_constraintEnd_toStartOf="@+id/goToPicIntent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/goToPicIntent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="166dp"
+        android:layout_marginRight="166dp"
+        android:onClick="startTakePicIntent"
+        android:text="@string/take_pic"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/back_to_main_menu_button_fromlibrary"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/goToApplyFilterIntent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:onClick="startFilterIntent"
+        android:text="@string/apply_filter"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/goToPicIntent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="0dp"
+        android:layout_height="82dp"
+        android:layout_marginTop="65dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageButton
+            android:id="@+id/imageButton_canoe"
+            android:layout_width="96dp"
+            android:layout_height="wrap_content"
+            android:paddingLeft="205dp"
+            android:paddingRight="205dp"
+            app:srcCompat="@drawable/canoe_lake_small"
+            tools:layout_editor_absoluteX="177dp"
+            tools:layout_editor_absoluteY="314dp" />
+
+        <ImageButton
+            android:id="@+id/imageButton2_dog"
+            android:layout_width="89dp"
+            android:layout_height="wrap_content"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"
+            app:srcCompat="@drawable/dog_small"
+            tools:layout_editor_absoluteX="177dp"
+            tools:layout_editor_absoluteY="314dp" />
+
+        <ImageButton
+            android:id="@+id/imageButton_ski_resort"
+            android:layout_width="96dp"
+            android:layout_height="wrap_content"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"
+            app:srcCompat="@drawable/ski_resort_small"
+            tools:layout_editor_absoluteX="177dp"
+            tools:layout_editor_absoluteY="314dp" />
+
+        <ImageButton
+            android:id="@+id/imageButton_london"
+            android:layout_width="104dp"
+            android:layout_height="68dp"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"
+            app:srcCompat="@drawable/london_skyline_small"
+            tools:layout_editor_absoluteX="177dp"
+            tools:layout_editor_absoluteY="314dp" />
+
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/selectedImage"
+        android:layout_width="93dp"
+        android:layout_height="59dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+</android.support.constraint.ConstraintLayout>

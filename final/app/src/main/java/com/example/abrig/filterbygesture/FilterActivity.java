@@ -1,25 +1,15 @@
 package com.example.abrig.filterbygesture;
 
-import android.Manifest;
-import android.app.Activity;
-import android.app.usage.UsageEvents;
-import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Color;
 import android.graphics.Matrix;
 import android.media.MediaScannerConnection;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Environment;
 import android.provider.MediaStore;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -30,13 +20,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.zomato.photofilters.SampleFilters;
 import com.zomato.photofilters.geometry.Point;
 import com.zomato.photofilters.imageprocessors.Filter;
 import com.zomato.photofilters.imageprocessors.subfilters.BrightnessSubFilter;
 import com.zomato.photofilters.imageprocessors.subfilters.ColorOverlaySubFilter;
 import com.zomato.photofilters.imageprocessors.subfilters.ContrastSubFilter;
-import com.zomato.photofilters.imageprocessors.subfilters.SaturationSubFilter;
 import com.zomato.photofilters.imageprocessors.subfilters.ToneCurveSubFilter;
 import com.zomato.photofilters.imageprocessors.subfilters.VignetteSubFilter;
 
@@ -53,12 +41,10 @@ public class FilterActivity extends AppCompatActivity {
 
     private TextView gestureText;
     private GestureDetector myGestureDectector;
-    private int count = 0;
 
     private ImageView selectedImage;
     private Bitmap selectedImageBitmap;
     private Bitmap startOverImageBitmap;
-    private String lst = "";
 
     public static final int MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE = 123;
 
@@ -135,11 +121,6 @@ public class FilterActivity extends AppCompatActivity {
         startActivityForResult(intent, 0);
     }
 
-    public void startGalleryIntent(View view) {
-        Intent intent = new Intent(FilterActivity.this, GalleryActivity.class);
-        startActivityForResult(intent, 0);
-    }
-
     public void startFirstIntent(View view) {
         Intent intent = new Intent(FilterActivity.this, MainActivity.class);
         startActivityForResult(intent, 1);
@@ -196,16 +177,6 @@ public class FilterActivity extends AppCompatActivity {
         Toast.makeText(FilterActivity.this, "Picture saved successfully",Toast.LENGTH_LONG).show();
     }
 
-    public void startEditingOver(View view) {
-        if(startOverImageBitmap != null){
-            selectedImageBitmap = startOverImageBitmap.copy(Bitmap.Config.ARGB_8888, true);
-            selectedImage.setImageBitmap(selectedImageBitmap);
-        }
-        else{
-            Toast.makeText(FilterActivity.this, "Select a picture first.", Toast.LENGTH_LONG).show();
-        }
-    }
-
     class AndroidGestureDectector implements GestureDetector.OnGestureListener, GestureDetector.OnDoubleTapListener {
 
         public Filter myFilter = new Filter();
@@ -219,11 +190,8 @@ public class FilterActivity extends AppCompatActivity {
 
         @Override
         public boolean onSingleTapConfirmed(MotionEvent motionEvent) {
-//            gestureText.setText("onSingleTapConfirmed");
-//            lst += "onSingleTapConfirmed,  ";
             Log.d("Gesture ", "onSingleTapConfirmed");
             Random rnd = new Random();
-//            int color = Color.argb(255, rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256));
             int dep = rnd.nextInt(100);
             float r = rnd.nextFloat();
             float b = rnd.nextFloat();
@@ -235,20 +203,14 @@ public class FilterActivity extends AppCompatActivity {
 
         @Override
         public boolean onDoubleTap(MotionEvent motionEvent) {
-//            gestureText.setText("onDoubleTap");
-//            lst += "onDoubleTap,  ";
             Log.d("Gesture ", "onDoubleTap");
-//            myFilter.addSubFilter(new BrightnessSubFilter(30));
-//            myFilter.addSubFilter(new ContrastSubFilter(1.1f));
-//            selectedImageBitmap = myFilter.processFilter(selectedImageBitmap);
             return false;
         }
 
         @Override
         public boolean onDoubleTapEvent(MotionEvent motionEvent) {
-//            gestureText.setText("onDoubleTapEvent");
-//            lst += "onDoubleTapEvent,  ";
             Log.d("Gesture ", "onDoubleTapEvent");
+            gestureText.setText("Applying: Vignette filter");
             myFilter.addSubFilter(new VignetteSubFilter(FilterActivity.this, 100));
             processImage();
             return false;
@@ -256,26 +218,18 @@ public class FilterActivity extends AppCompatActivity {
 
         @Override
         public boolean onDown(MotionEvent motionEvent) {
-//            gestureText.setText("onDown");
-//            lst += "onDown,  ";
             Log.d("Gesture ", "onDown");
             return false;
         }
 
         @Override
         public void onShowPress(MotionEvent motionEvent) {
-//            String line = "onShowPress";
-//            lst += line + ",  ";
-//            Toast.makeText(FilterActivity.this, line, Toast.LENGTH_LONG).show();
-//            gestureText.setText(line);
             Log.d("Gesture ", "onShowPress");
 
         }
 
         @Override
         public boolean onSingleTapUp(MotionEvent motionEvent) {
-//            gestureText.setText("onSingleTapUp");
-//            lst += "onSingleTapUp,  ";
             Log.d("Gesture ", "onSingleTapUp");
 //            myFilter.addSubFilter(new ColorOverlaySubFilter(100, .2f, .2f, .0f));
 //            selectedImageBitmap = myFilter.processFilter(selectedImageBitmap);
@@ -284,40 +238,28 @@ public class FilterActivity extends AppCompatActivity {
 
         @Override
         public boolean onScroll(MotionEvent motionEvent, MotionEvent motionEvent1, float v, float v1) {
-//            gestureText.setText("onScroll");
-//            String line = "";
-////            count++;
-//            updateNumTouches();
-//            line = "";
             if (motionEvent.getX() < motionEvent1.getX()) {
-//                String line = "GESTURE: Left to Right Scroll: " + motionEvent.getX() + " - " + motionEvent1.getX() + "\nSPEED: " + String.valueOf(v) + " pixels/second";
-////                Toast.makeText(FilterActivity.this,line,Toast.LENGTH_LONG).show();
-//                Log.d("onScroll ", line);
+                String line = "GESTURE: Left to Right Scroll: " + motionEvent.getX() + " - " + motionEvent1.getX() + "\nSPEED: " + String.valueOf(v) + " pixels/second";
+                Log.d("onScroll ", line);
             }
             if (motionEvent.getX() > motionEvent1.getX()) {
-//                String line = "GESTURE: Right to Left Scroll: " + motionEvent.getX() + " - " + motionEvent1.getX() + "\nSPEED: " + String.valueOf(v) + " pixels/second";
-////                Toast.makeText(FilterActivity.this,line,Toast.LENGTH_LONG).show();
-//                Log.d("onScroll ", line);
+                String line = "GESTURE: Right to Left Scroll: " + motionEvent.getX() + " - " + motionEvent1.getX() + "\nSPEED: " + String.valueOf(v) + " pixels/second";
+                Log.d("onScroll ", line);
             }
             if (motionEvent.getY() < motionEvent1.getY()) {
-//                String line = "GESTURE: Up to Down Scroll: " + motionEvent.getX() + " - " + motionEvent1.getX() + "\nSPEED: " + String.valueOf(v) + " pixels/second";
-////                Toast.makeText(FilterActivity.this,line,Toast.LENGTH_LONG).show();
-//                Log.d("onScroll ", line);
+                String line = "GESTURE: Up to Down Scroll: " + motionEvent.getX() + " - " + motionEvent1.getX() + "\nSPEED: " + String.valueOf(v) + " pixels/second";
+                Log.d("onScroll ", line);
             }
             if (motionEvent.getY() > motionEvent1.getY()) {
-//                String line = "GESTURE: Down to Up Scroll: " + motionEvent.getX() + " - " + motionEvent1.getX() + "\nSPEED: " + String.valueOf(v) + " pixels/second";
-////                Toast.makeText(FilterActivity.this,line,Toast.LENGTH_LONG).show();
-//                Log.d("onScroll ", line);
+                String line = "GESTURE: Down to Up Scroll: " + motionEvent.getX() + " - " + motionEvent1.getX() + "\nSPEED: " + String.valueOf(v) + " pixels/second";
+                Log.d("onScroll ", line);
             }
             return false;
         }
 
         @Override
         public void onLongPress(MotionEvent motionEvent) {
-//            gestureText.setText("onLongPress");
-//            lst += "onLongPress,  ";
             Log.d("Gesture ", "onLongPress");
-            //Bitmap currPic = myFilter.processFilter(selectedImageBitmap);
             Toast.makeText(FilterActivity.this, "RESETTING IMAGE", Toast.LENGTH_LONG).show();
             selectedImageBitmap = startOverImageBitmap.copy(Bitmap.Config.ARGB_8888, true);
             selectedImage.setImageBitmap(startOverImageBitmap);
@@ -326,7 +268,6 @@ public class FilterActivity extends AppCompatActivity {
 
         @Override
         public boolean onFling(MotionEvent motionEvent, MotionEvent motionEvent1, float v, float v1) {
-//            gestureText.setText("onFling");
             float diffX = Math.abs(motionEvent1.getX() - motionEvent.getX());
             float diffY = Math.abs(motionEvent1.getY() - motionEvent.getY());
             if(diffX > diffY) { // R -> L || L -> R
@@ -347,7 +288,6 @@ public class FilterActivity extends AppCompatActivity {
                     rgbKnots[6] = new Point(207, 233);
                     rgbKnots[7] = new Point(255, 255);
                     myFilter.addSubFilter(new ToneCurveSubFilter(rgbKnots, null, null, null));
-//                    myFilter.addSubFilter(new BrightnessSubFilter(30));
                     processImage();
                 }
                 if (motionEvent.getX() > motionEvent1.getX()) {
@@ -417,7 +357,6 @@ public class FilterActivity extends AppCompatActivity {
                     blueKnots[5] = new Point(212, 233);
                     blueKnots[6] = new Point(255, 255);
                     myFilter.addSubFilter(new ToneCurveSubFilter(rgbKnots, redKnots, greenKnots, blueKnots));
-//                    myFilter.addSubFilter(new ContrastSubFilter(1.2f));
 
                     processImage();
                 }
@@ -463,26 +402,9 @@ public class FilterActivity extends AppCompatActivity {
 
     @Override
     public boolean onTouchEvent(final MotionEvent event) {
-//        count++;
-        lst = "";
         if(selectedImageBitmap != null) {
-//            Runnable runnable = new Runnable() {
-//
-////                public MotionEvent event = event;
-//
-//                @Override
-//                public void run() {
-//
-//
-//                }
-//            };
-//            Thread mythread = new Thread(runnable);
-//            mythread.start();
             myGestureDectector.onTouchEvent(event);
         }
-//        else{
-//            Toast.makeText(FilterActivity.this, "Select a picture first", Toast.LENGTH_LONG).show();
-//        }
         return super.onTouchEvent(event);
     }
 }

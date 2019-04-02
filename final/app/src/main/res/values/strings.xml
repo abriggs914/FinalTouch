@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Filter By Gesture</string>
+    <string name="app_name">FinalTouch</string>
     <string name="gesture">gesture</string>
     <string name="take_picture">Take Picture</string>
     <string name="gallery">Gallery</string>
@@ -9,4 +9,10 @@
     <string name="library">Library</string>
     <string name="select_from_gallery">Select From Gallery</string>
     <string name="library_caps">LIBRARY</string>
+    <string name="nightwhisper_filter">NightWhisper filter</string>
+    <string name="startlit_filter_30">StartLit filter 30</string>
+    <string name="awestruckvibe_filter">AweStruckVibe filter</string>
+    <string name="bluemess_filter">BlueMess filter</string>
+    <string name="vignette_filter">Vignette filter</string>
+    <string name="reset_current_image">Reset Current Image</string>
 </resources>

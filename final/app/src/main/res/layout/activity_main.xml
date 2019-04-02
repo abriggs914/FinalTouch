@@ -33,7 +33,7 @@
                 <ImageView
                     android:layout_width="64dp"
                     android:layout_height="64dp"
-                    android:background="@drawable/cerclebackgroundpurple"
+                    android:background="@drawable/cerclebackgroundgreen"
                     android:src="@drawable/ic_photo_library_black_24dp"
                     android:padding="10dp"/>
                 <TextView

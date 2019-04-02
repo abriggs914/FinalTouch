@@ -5,7 +5,7 @@
     android:id="@+id/activity_filter"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/darkBackground"
+    android:background="#fff"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
@@ -20,25 +20,11 @@
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"
-        android:layout_marginEnd="5dp"
-        android:layout_marginRight="5dp"
         android:onClick="startFirstIntent"
         android:src="@drawable/arrow_back_black_24dp"
-        app:layout_constraintEnd_toStartOf="@+id/goToPicIntent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/goToPicIntent"
-        android:layout_width="75dp"
-        android:layout_height="60dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="5dp"
-        android:layout_marginRight="5dp"
-        android:onClick="startTakePicIntent"
-        android:text="@string/take_pic"
-        app:layout_constraintEnd_toStartOf="@+id/gestureLibraryButton"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="@drawable/mybutton"/>
 
     <TextView
         android:id="@+id/tvGesture"
@@ -62,7 +48,7 @@
     <ImageView
         android:id="@+id/displayedImage"
         android:layout_width="339dp"
-        android:layout_height="316dp"
+        android:layout_height="348dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"
@@ -72,23 +58,12 @@
         app:layout_constraintBottom_toTopOf="@+id/tvGesture"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/gestureLibraryButton" />
+        app:layout_constraintTop_toBottomOf="@+id/selectFromGalleryButton" />
 
     <Button
-        android:id="@+id/gestureLibraryButton"
-        android:layout_width="79dp"
-        android:layout_height="60dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="5dp"
-        android:layout_marginRight="5dp"
-        android:onClick="startLibraryIntent"
-        android:text="@string/library"
-        app:layout_constraintEnd_toStartOf="@+id/selectFromGalleryButton"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
+        android:background="@drawable/mybutton"
         android:id="@+id/selectFromGalleryButton"
-        android:layout_width="115dp"
+        android:layout_width="237dp"
         android:layout_height="60dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="5dp"
@@ -99,15 +74,18 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageButton
+        android:background="@drawable/otherbutton"
+
         android:id="@+id/saveFilteredPictureButton"
         android:layout_width="326dp"
-        android:layout_height="40dp"
+        android:layout_height="52dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginBottom="8dp"
+        android:backgroundTint="#0000ff"
         android:onClick="saveEditedPicture"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
